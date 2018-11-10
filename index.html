@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="reset.css" />
+  <title>Document</title>
+  <style>
+  .test {
+    height: 100vh;
+    background-color: blue;
+  }
+  .fadein {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s;
+    height: 700px;
+    width: 300px;
+    background-color: red;
+  }
+  </style>
+</head>
+<body>
+  <div class="test"></div>
+  <img src="1.png" class="fadein" />
+  <script>
+  window.addEventListener("DOMContentLoaded", function(){
+    window.onscroll = function(){
+      var myFade = document.getElementsByClassName('fadein');
+      for (var i = 0; i < myFade.length; i++) {
+        var targetElement = myFade[i].getBoundingClientRect();
+        var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+        var windowHeight = window.innerHeight;
+
+        if(scroll > scroll + targetElement.top - windowHeight + 100) {
+          myFade[i].style.opacity = '1';
+          myFade[i].style.transform = 'translateY(0)';
+        }
+      }
+    }
+  }, false);
+  </script>
+</body>
+</html>
+
+<!-- jqery version -->
+<!-- $(function(){
+    $(window).scroll(function (){
+        $('.fadein').each(function(){
+            var targetElement = $(this).offset().top;
+            var scroll = $(window).scrollTop();
+            var windowHeight = $(window).height();
+            if (scroll > targetElement - windowHeight + 200){
+                $(this).css('opacity','1');
+                $(this).css('transform','translateY(0)');
+            }
+        });
+    });
+}); -->
